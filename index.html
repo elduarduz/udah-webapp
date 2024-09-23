@@ -65,11 +65,12 @@
         .blue-line {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
+            left: 50%;
+            width: calc(100% - 40px); /* Kurangi lebar garis sesuai dengan margin */
             height: 5px;
             background-color: blue;
             z-index: 2;
+            transform: translateX(-50%); /* Posisikan garis di tengah */
         }
 
         .button-panel {
