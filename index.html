@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UDAH Web App</title>
+    <title>Mini Game - Click the Red Ball</title>
     <style>
         @font-face {
             font-family: 'Pixelite';
@@ -20,13 +20,41 @@
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
             margin: 0;
+            overflow: hidden;
+            position: relative;
         }
 
         h1 {
             color: #333;
-            margin: 20px 0;
             font-size: 24px;
             text-align: center;
+        }
+
+        .score {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 48px;
+            font-family: 'Pixelite', sans-serif;
+        }
+
+        .ball {
+            position: absolute;
+            bottom: 0;
+            background-color: red;
+            border-radius: 50%;
+            cursor: pointer;
+            animation: moveUp 5s linear infinite;
+        }
+
+        @keyframes moveUp {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100vh);
+            }
         }
 
         .button-panel {
@@ -77,29 +105,64 @@
     </style>
 </head>
 <body>
-    <h1>Selamat Datang di UDAH Web App!</h1>
+    <h1>Click the Red Ball!</h1>
+    <div class="score">0</div>
 
+    <!-- Panel Tombol Bawah -->
     <div class="button-panel">
         <button class="button">
-            <img src="assets/icons/checkin.png" alt="Check-In Icon">
+            <img src="sign-icon.png" alt="Check-In Icon">
             <span>Check-In</span>
         </button>
         <button class="button">
-            <img src="assets/icons/Quest.png" alt="Quest Icon">
+            <img src="quest-icon.png" alt="Quest Icon">
             <span>Quest</span>
         </button>
         <button class="button">
-            <img src="assets/icons/Play.png" alt="Play Icon">
+            <img src="play-icon.png" alt="Play Icon">
             <span>Play</span>
         </button>
         <button class="button">
-            <img src="assets/icons/Invites.png" alt="Invites Icon">
+            <img src="invites-icon.png" alt="Invites Icon">
             <span>Invites</span>
         </button>
         <button class="button">
-            <img src="assets/icons/Leaderboard.png" alt="Leaderboard Icon">
+            <img src="leaderboard-icon.png" alt="Leaderboard Icon">
             <span>Leader Board</span>
         </button>
     </div>
+
+    <script>
+        let score = 0;
+        const scoreDisplay = document.querySelector('.score');
+
+        function createBall() {
+            const ball = document.createElement('div');
+            const size = Math.random() * 40 + 20; // Ukuran acak antara 20px dan 60px
+            const position = Math.random() * (window.innerWidth - size);
+
+            ball.classList.add('ball');
+            ball.style.width = size + 'px';
+            ball.style.height = size + 'px';
+            ball.style.left = position + 'px';
+            ball.style.animationDuration = Math.random() * 3 + 3 + 's'; // Durasi animasi acak antara 3-6 detik
+
+            ball.addEventListener('click', () => {
+                score += Math.floor(size); // Poin bertambah sesuai ukuran bola
+                scoreDisplay.textContent = score;
+                ball.remove(); // Hapus bola setelah diklik
+            });
+
+            document.body.appendChild(ball);
+
+            // Hapus bola setelah animasi selesai (ketika bola sudah melayang ke atas)
+            ball.addEventListener('animationend', () => {
+                ball.remove();
+            });
+        }
+
+        // Buat bola baru setiap 1 detik
+        setInterval(createBall, 1000);
+    </script>
 </body>
 </html>
