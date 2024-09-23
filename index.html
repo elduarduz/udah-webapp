@@ -19,31 +19,31 @@
         h1 {
             color: #333;
             margin: 20px 0;
-            font-size: 24px; /* Ukuran font disesuaikan */
-            text-align: center; /* Teks rata tengah */
+            font-size: 24px;
+            text-align: center;
         }
         .button-panel {
             display: flex;
-            justify-content: space-around; /* Menggunakan space-around untuk distribusi */
             width: 100%;
-            padding: 10px 0;
+            padding: 0;
             background-color: #fff;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
             position: absolute;
             bottom: 0;
         }
         .button {
-            flex: 1; /* Tombol mengambil ruang yang sama */
-            margin: 0 5px; /* Mengurangi margin untuk tampilan lebih baik */
-            padding: 12px; /* Padding disesuaikan */
+            flex: 1;
+            padding: 12px 0;
             background-color: #007bff;
             color: white;
-            border: none;
-            border-radius: 5px;
+            border: 1px solid #fff; /* Ganti margin dengan border */
             cursor: pointer;
-            font-size: 14px; /* Ukuran font disesuaikan */
+            font-size: 14px;
             transition: background-color 0.3s;
-            text-align: center; /* Teks di tengah tombol */
+            text-align: center;
+        }
+        .button:first-child {
+            border-left: none; /* Hilangkan border di tombol pertama */
         }
         .button:hover {
             background-color: #0056b3;
