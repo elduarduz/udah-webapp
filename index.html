@@ -21,6 +21,7 @@
             margin: 0;
             overflow: hidden;
             position: relative;
+            cursor: url('assets/icons/cursor.png'), auto; /* Ganti dengan path ke gambar kursor */
         }
 
         h1 {
@@ -197,7 +198,7 @@
                 const blueLineRect = document.querySelector('.blue-line').getBoundingClientRect();
 
                 if (ballRect.top <= blueLineRect.bottom) {
-                    score -= 50; // Kurangi poin 1 jika bola menyentuh garis biru
+                    score -= 5; // Kurangi poin 1 jika bola menyentuh garis biru
                     scoreDisplay.textContent = score;
                     ball.remove();
                     clearInterval(intervalId);
