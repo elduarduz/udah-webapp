@@ -11,6 +11,7 @@
             justify-content: space-between;
             align-items: center;
             height: 100vh;
+            width: 100vw;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -18,6 +19,7 @@
         h1 {
             color: #333;
             margin-top: 20px;
+            font-size: 24px; /* Ukuran font disesuaikan */
         }
         .button-panel {
             display: flex;
@@ -31,14 +33,15 @@
         }
         .button {
             flex: 1;
-            margin: 0 5px;
-            padding: 15px;
+            margin: 0 2px; /* Mengurangi margin untuk tampilan lebih baik */
+            padding: 12px; /* Padding disesuaikan */
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px; /* Ukuran font disesuaikan */
+            transition: background-color 0.3s;
         }
         .button:hover {
             background-color: #0056b3;
