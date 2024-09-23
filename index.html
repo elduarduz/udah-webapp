@@ -13,7 +13,7 @@
         body {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center; /* Teks di tengah layar */
             align-items: center;
             height: 100vh;
             width: 100vw;
@@ -32,11 +32,12 @@
 
         .score {
             position: absolute;
-            top: 20px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             font-size: 48px;
             font-family: 'Pixelite', sans-serif;
+            z-index: 10; /* Pastikan poin tetap di atas */
         }
 
         .ball {
@@ -45,6 +46,7 @@
             background-color: red;
             border-radius: 50%;
             cursor: pointer;
+            z-index: 1; /* Letakkan bola di belakang panel */
             animation: moveUp 5s linear infinite;
         }
 
@@ -65,6 +67,7 @@
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
             position: absolute;
             bottom: 0;
+            z-index: 5; /* Panel berada di depan bola */
         }
 
         .button {
@@ -111,23 +114,23 @@
     <!-- Panel Tombol Bawah -->
     <div class="button-panel">
         <button class="button">
-            <img src="sign-icon.png" alt="Check-In Icon">
+            <img src="assets/icons/checkin.png" alt="Check-In Icon">
             <span>Check-In</span>
         </button>
         <button class="button">
-            <img src="quest-icon.png" alt="Quest Icon">
+            <img src="assets/icons/Quest.png" alt="Quest Icon">
             <span>Quest</span>
         </button>
         <button class="button">
-            <img src="play-icon.png" alt="Play Icon">
+            <img src="assets/icons/Play.png" alt="Play Icon">
             <span>Play</span>
         </button>
         <button class="button">
-            <img src="invites-icon.png" alt="Invites Icon">
+            <img src="assets/icons/Invites.png" alt="Invites Icon">
             <span>Invites</span>
         </button>
         <button class="button">
-            <img src="leaderboard-icon.png" alt="Leaderboard Icon">
+            <img src="assets/icons/Leaderboard.png" alt="Leaderboard Icon">
             <span>Leader Board</span>
         </button>
     </div>
@@ -148,7 +151,8 @@
             ball.style.animationDuration = Math.random() * 3 + 3 + 's'; // Durasi animasi acak antara 3-6 detik
 
             ball.addEventListener('click', () => {
-                score += Math.floor(size); // Poin bertambah sesuai ukuran bola
+                const points = Math.floor(Math.random() * 90) + 10; // Poin acak antara 10 dan 99
+                score += points; // Tambah poin
                 scoreDisplay.textContent = score;
                 ball.remove(); // Hapus bola setelah diklik
             });
@@ -157,6 +161,8 @@
 
             // Hapus bola setelah animasi selesai (ketika bola sudah melayang ke atas)
             ball.addEventListener('animationend', () => {
+                score -= 1; // Kurangi poin 1 jika bola lolos
+                scoreDisplay.textContent = score;
                 ball.remove();
             });
         }
