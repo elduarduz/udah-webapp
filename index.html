@@ -65,12 +65,11 @@
         .blue-line {
             position: absolute;
             top: 0;
-            left: 50%;
-            width: calc(100% - 40px); /* Kurangi lebar garis sesuai dengan margin */
+            left: 0;
+            width: 100%;
             height: 5px;
             background-color: blue;
             z-index: 2;
-            transform: translateX(-50%); /* Posisikan garis di tengah */
         }
 
         .button-panel {
@@ -196,10 +195,9 @@
                 // Cek apakah bola sudah melewati garis biru
                 const ballRect = ball.getBoundingClientRect();
                 const blueLineRect = document.querySelector('.blue-line').getBoundingClientRect();
-                const isBlueLineVisible = blueLineRect.width > 0; // Cek apakah garis biru terlihat
 
-                if (ballRect.top <= blueLineRect.bottom && isBlueLineVisible) {
-                    score -= 50; // Kurangi poin 50 jika bola menyentuh garis biru dan garis terlihat
+                if (ballRect.top <= blueLineRect.bottom) {
+                    score -= 50; // Kurangi poin 1 jika bola menyentuh garis biru
                     scoreDisplay.textContent = score;
                     ball.remove();
                     clearInterval(intervalId);
