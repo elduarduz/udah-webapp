@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UDAH Web App</title>
     <style>
+        @font-face {
+            font-family: 'Pixelite';
+            src: url('path-to-pixelite-font.ttf'); /* Ganti dengan path ke font Pixelite */
+        }
+
         body {
             display: flex;
             flex-direction: column;
@@ -16,37 +21,58 @@
             font-family: Arial, sans-serif;
             margin: 0;
         }
+
         h1 {
             color: #333;
             margin: 20px 0;
             font-size: 24px;
             text-align: center;
         }
+
         .button-panel {
             display: flex;
-            width: 100%;
+            width: 120%; /* Memperbesar panel 20% */
             padding: 0;
             background-color: #fff;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
             position: absolute;
             bottom: 0;
         }
+
         .button {
             flex: 1;
-            padding: 12px 0;
-            background-color: #007bff;
+            padding: 20px 0; /* Memperbesar padding tombol */
+            background-color: #000; /* Mengubah warna ke hitam */
             color: white;
-            border: 1px solid #fff; /* Ganti margin dengan border */
+            border: 1px solid #fff;
             cursor: pointer;
             font-size: 14px;
+            font-family: 'Pixelite', sans-serif;
             transition: background-color 0.3s;
             text-align: center;
+            position: relative;
         }
+
         .button:first-child {
-            border-left: none; /* Hilangkan border di tombol pertama */
+            border-left: none;
         }
+
         .button:hover {
-            background-color: #0056b3;
+            background-color: #333;
+        }
+
+        .button img {
+            width: 20px; /* Ukuran icon */
+            height: 20px;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .button span {
+            display: block;
+            margin-top: 30px; /* Mengatur jarak teks dari gambar */
         }
     </style>
 </head>
@@ -54,11 +80,26 @@
     <h1>Selamat Datang di UDAH Web App!</h1>
 
     <div class="button-panel">
-        <button class="button">Check-In</button>
-        <button class="button">Quest</button>
-        <button class="button">Play</button>
-        <button class="button">Invites</button>
-        <button class="button">Leader Board</button>
+        <button class="button">
+            <img src="assets/icons/checkin.png" alt="Check-In Icon">
+            <span>Check-In</span>
+        </button>
+        <button class="button">
+            <img src="assets/icons/Quest.png" alt="Quest Icon">
+            <span>Quest</span>
+        </button>
+        <button class="button">
+            <img src="assets/icons/Play.png" alt="Play Icon">
+            <span>Play</span>
+        </button>
+        <button class="button">
+            <img src="assets/icons/Invites.png" alt="Invites Icon">
+            <span>Invites</span>
+        </button>
+        <button class="button">
+            <img src="assets/icons/Leaderboard.png" alt="Leaderboard Icon">
+            <span>Leader Board</span>
+        </button>
     </div>
 </body>
 </html>
