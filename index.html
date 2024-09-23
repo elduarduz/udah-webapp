@@ -196,9 +196,10 @@
                 // Cek apakah bola sudah melewati garis biru
                 const ballRect = ball.getBoundingClientRect();
                 const blueLineRect = document.querySelector('.blue-line').getBoundingClientRect();
+                const isBlueLineVisible = blueLineRect.width > 0; // Cek apakah garis biru terlihat
 
-                if (ballRect.top <= blueLineRect.bottom) {
-                    score -= 50; // Kurangi poin 1 jika bola menyentuh garis biru
+                if (ballRect.top <= blueLineRect.bottom && isBlueLineVisible) {
+                    score -= 50; // Kurangi poin 50 jika bola menyentuh garis biru dan garis terlihat
                     scoreDisplay.textContent = score;
                     ball.remove();
                     clearInterval(intervalId);
