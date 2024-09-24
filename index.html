@@ -16,7 +16,7 @@
             align-items: center;
             height: 100vh;
             width: 100vw;
-            background-color: #f0f0f0;
+            background-color: #1e1e1e; /* Background biru gelap */
             font-family: Arial, sans-serif;
             margin: 0;
             overflow: hidden;
@@ -25,7 +25,7 @@
         }
 
         h1 {
-            color: #333;
+            color: #fff;
             font-size: 24px;
             text-align: center;
             position: absolute;
@@ -44,21 +44,17 @@
             z-index: 10; /* Pastikan poin tetap di atas */
             display: flex;
             align-items: center;
+            color: #fff; /* Warna teks putih */
         }
 
-        .score .points {
+        .score .points, .score .label {
             transition: transform 0.5s ease, opacity 0.5s ease;
             opacity: 0;
         }
 
-        .score .points.show {
+        .score .points.show, .score .label.show {
             opacity: 1;
             transform: translateY(-20px);
-        }
-
-        .score .label {
-            margin-left: 10px;
-            font-size: 24px;
         }
 
         .ball {
@@ -191,6 +187,7 @@
     <script>
         let score = 0;
         const scoreDisplay = document.querySelector('.points');
+        const labelDisplay = document.querySelector('.label');
 
         function formatScore(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Format dengan dot
@@ -214,10 +211,12 @@
                 // Update tampilan poin dengan animasi
                 scoreDisplay.textContent = formatScore(score);
                 scoreDisplay.classList.add('show');
+                labelDisplay.classList.add('show'); // Tambahkan animasi pada label "UDAH"
 
                 setTimeout(() => {
                     scoreDisplay.classList.remove('show');
-                }, 1000); // Hapus animasi setelah 1 detik
+                    labelDisplay.classList.remove('show'); // Hapus animasi setelah 1 detik
+                }, 1000); 
 
                 ball.remove(); // Hapus bola setelah diklik
             });
@@ -233,6 +232,7 @@
                     score += 1; // Bertambah 1 point jika bola menyentuh garis biru
                     scoreDisplay.textContent = formatScore(score);
                     scoreDisplay.classList.add('show');
+                    labelDisplay.classList.add('show'); // Tambahkan animasi pada label "UDAH"
                     clearTimeout(intervalId);
                     ball.remove();
                 }
