@@ -198,7 +198,7 @@
                 const blueLineRect = document.querySelector('.blue-line').getBoundingClientRect();
 
                 if (ballRect.top <= blueLineRect.bottom) {
-                    score -= 5; // Kurangi poin 1 jika bola menyentuh garis biru
+                    score += 1; // Bertambah 1 point jika bola menyentuh garis biru
                     scoreDisplay.textContent = score;
                     ball.remove();
                     clearInterval(intervalId);
