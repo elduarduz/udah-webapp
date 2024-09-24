@@ -42,6 +42,23 @@
             font-size: 48px;
             font-family: 'Pixelite', sans-serif;
             z-index: 10; /* Pastikan poin tetap di atas */
+            display: flex;
+            align-items: center;
+        }
+
+        .score .points {
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .score .points.show {
+            opacity: 1;
+            transform: translateY(-20px);
+        }
+
+        .score .label {
+            margin-left: 10px;
+            font-size: 24px;
         }
 
         .ball {
@@ -139,7 +156,10 @@
 </head>
 <body>
     <h1>Click the Red Ball!</h1>
-    <div class="score">0</div>
+    <div class="score">
+        <div class="points">0</div>
+        <div class="label">UDAH</div>
+    </div>
 
     <!-- Garis Biru di Atas -->
     <div class="blue-line"></div>
@@ -170,7 +190,11 @@
 
     <script>
         let score = 0;
-        const scoreDisplay = document.querySelector('.score');
+        const scoreDisplay = document.querySelector('.points');
+
+        function formatScore(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Format dengan dot
+        }
 
         function createBall() {
             const ball = document.createElement('div');
@@ -186,7 +210,15 @@
             ball.addEventListener('click', () => {
                 const points = Math.floor(Math.random() * 90) + 10; // Poin acak antara 10 dan 99
                 score += points;
-                scoreDisplay.textContent = score;
+
+                // Update tampilan poin dengan animasi
+                scoreDisplay.textContent = formatScore(score);
+                scoreDisplay.classList.add('show');
+
+                setTimeout(() => {
+                    scoreDisplay.classList.remove('show');
+                }, 1000); // Hapus animasi setelah 1 detik
+
                 ball.remove(); // Hapus bola setelah diklik
             });
 
@@ -199,9 +231,10 @@
 
                 if (ballRect.top <= blueLineRect.bottom) {
                     score += 1; // Bertambah 1 point jika bola menyentuh garis biru
-                    scoreDisplay.textContent = score;
+                    scoreDisplay.textContent = formatScore(score);
+                    scoreDisplay.classList.add('show');
+                    clearTimeout(intervalId);
                     ball.remove();
-                    clearInterval(intervalId);
                 }
             }, 100);
         }
