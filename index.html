@@ -70,24 +70,52 @@
     
         function createBall() {
           const ball = document.createElement('div');
+          const size = Math.random() * 40 + 20; // Ukuran acak antara 20px dan 60px
+          const position = Math.random() * (window.innerWidth - size);
+
           ball.classList.add('ball');
-          
-          // Event ketika bola diklik
+          ball.style.width = size + 'px';
+          ball.style.height = size + 'px';
+          ball.style.left = position + 'px';
+          ball.style.animationDuration = Math.random() * 3 + 3 + 's'; // Durasi animasi acak antara 3-6 detik
+
+          // Update ball to use the drop.png as background
+          ball.style.backgroundImage = 'url("assets/icons/drop.png")';
+          ball.style.backgroundSize = 'cover';
+          ball.style.backgroundPosition = 'center';
+          ball.style.borderRadius = '50%';
+
           ball.addEventListener('click', () => {
-            const points = Math.floor(Math.random() * 5) + 1; // Poin acak antara 1-5
+            const points = Math.floor(Math.random() * 5) + 1; // Poin acak antara 1 dan 5
             updateScoreOnClick(userId, points);
             ball.remove(); // Hapus bola setelah diklik
           });
-    
+
           document.body.appendChild(ball);
+
+          const intervalId = setInterval(() => {
+            // Cek apakah bola sudah melewati garis biru
+            const ballRect = ball.getBoundingClientRect();
+            const blueLineRect = document.querySelector('.blue-line').getBoundingClientRect();
+
+            if (ballRect.top <= blueLineRect.bottom) {
+              score += 1; // Bertambah 1 point jika bola menyentuh garis biru
+              const scoreDisplay = document.querySelector('.points');
+              scoreDisplay.textContent = formatScore(score);
+              scoreDisplay.classList.add('show');
+              const labelDisplay = document.querySelector('.label');
+              labelDisplay.classList.add('show'); // Tambahkan animasi pada label "UDAH"
+              clearInterval(intervalId);
+              ball.remove();
+            }
+          }, 100);
         }
       }
     </script>
 
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Game - Click the Red Ball</title>
+    <title>Mini Game - Click the Drop</title>
     <style>
         @font-face {
             font-family: 'Pixelite';
@@ -235,7 +263,7 @@
     </style>
 </head>
 <body>
-    <h1>Click the Red Ball!</h1>
+    <h1>Click the Drop!</h1>
     <div class="score">
         <div class="points">0</div>
         <div class="label">UDAH</div>
@@ -255,76 +283,9 @@
             <span>Quest</span>
         </button>
         <button class="button">
-            <img src="assets/icons/Play.png" alt="Play Icon">
-            <span>Play</span>
-        </button>
-        <button class="button">
-            <img src="assets/icons/Invites.png" alt="Invites Icon">
-            <span>Invites</span>
-        </button>
-        <button class="button">
-            <img src="assets/icons/Leaderboard.png" alt="Leaderboard Icon">
-            <span>Leader Board</span>
+            <img src="assets/icons/invite.png" alt="Invite Icon">
+            <span>Invite</span>
         </button>
     </div>
-
-    <script>
-        let score = 0;
-        const scoreDisplay = document.querySelector('.points');
-        const labelDisplay = document.querySelector('.label');
-
-        function formatScore(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Format dengan dot
-        }
-
-        function createBall() {
-            const ball = document.createElement('div');
-            const size = Math.random() * 40 + 20; // Ukuran acak antara 20px dan 60px
-            const position = Math.random() * (window.innerWidth - size);
-
-            ball.classList.add('ball');
-            ball.style.width = size + 'px';
-            ball.style.height = size + 'px';
-            ball.style.left = position + 'px';
-            ball.style.animationDuration = Math.random() * 3 + 3 + 's'; // Durasi animasi acak antara 3-6 detik
-
-            ball.addEventListener('click', () => {
-                const points = Math.floor(Math.random() * 5) + 1; // Poin acak antara 10 dan 99
-                score += points;
-
-                // Update tampilan poin dengan animasi
-                scoreDisplay.textContent = formatScore(score);
-                scoreDisplay.classList.add('show');
-                labelDisplay.classList.add('show'); // Tambahkan animasi pada label "UDAH"
-
-                setTimeout(() => {
-                    scoreDisplay.classList.remove('show');
-                    labelDisplay.classList.remove('show'); // Hapus animasi setelah 1 detik
-                }, 1000); 
-
-                ball.remove(); // Hapus bola setelah diklik
-            });
-
-            document.body.appendChild(ball);
-
-            const intervalId = setInterval(() => {
-                // Cek apakah bola sudah melewati garis biru
-                const ballRect = ball.getBoundingClientRect();
-                const blueLineRect = document.querySelector('.blue-line').getBoundingClientRect();
-
-                if (ballRect.top <= blueLineRect.bottom) {
-                    score += 1; // Bertambah 1 point jika bola menyentuh garis biru
-                    scoreDisplay.textContent = formatScore(score);
-                    scoreDisplay.classList.add('show');
-                    labelDisplay.classList.add('show'); // Tambahkan animasi pada label "UDAH"
-                    clearTimeout(intervalId);
-                    ball.remove();
-                }
-            }, 100);
-        }
-
-        // Buat bola baru setiap 1 detik
-        setInterval(createBall, 1000);
-    </script>
 </body>
 </html>
