@@ -52,8 +52,8 @@
               console.error("Error saving score:", error);
             });
           }
-        </script>
-        <script>
+    </script>
+    <script>
       let score = 0;
     
       function updateScoreOnClick(userId, points) {
@@ -70,52 +70,23 @@
     
         function createBall() {
           const ball = document.createElement('div');
-          const size = Math.random() * 40 + 20; // Ukuran acak antara 20px dan 60px
-          const position = Math.random() * (window.innerWidth - size);
-
           ball.classList.add('ball');
-          ball.style.width = size + 'px';
-          ball.style.height = size + 'px';
-          ball.style.left = position + 'px';
-          ball.style.animationDuration = Math.random() * 3 + 3 + 's'; // Durasi animasi acak antara 3-6 detik
-
-          // Update ball to use the drop.png as background
-          ball.style.backgroundImage = 'url("assets/icons/drop.png")';
-          ball.style.backgroundSize = 'cover';
-          ball.style.backgroundPosition = 'center';
-          ball.style.borderRadius = '50%';
-
+          
+          // Event ketika bola diklik
           ball.addEventListener('click', () => {
-            const points = Math.floor(Math.random() * 5) + 1; // Poin acak antara 1 dan 5
+            const points = Math.floor(Math.random() * 5) + 1; // Poin acak antara 1-5
             updateScoreOnClick(userId, points);
             ball.remove(); // Hapus bola setelah diklik
           });
-
+    
           document.body.appendChild(ball);
-
-          const intervalId = setInterval(() => {
-            // Cek apakah bola sudah melewati garis biru
-            const ballRect = ball.getBoundingClientRect();
-            const blueLineRect = document.querySelector('.blue-line').getBoundingClientRect();
-
-            if (ballRect.top <= blueLineRect.bottom) {
-              score += 1; // Bertambah 1 point jika bola menyentuh garis biru
-              const scoreDisplay = document.querySelector('.points');
-              scoreDisplay.textContent = formatScore(score);
-              scoreDisplay.classList.add('show');
-              const labelDisplay = document.querySelector('.label');
-              labelDisplay.classList.add('show'); // Tambahkan animasi pada label "UDAH"
-              clearInterval(intervalId);
-              ball.remove();
-            }
-          }, 100);
         }
       }
     </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Game - Click the Drop</title>
+    <title>Mini Game - Click the Red Ball</title>
     <style>
         @font-face {
             font-family: 'Pixelite';
@@ -172,8 +143,11 @@
         .ball {
             position: absolute;
             bottom: 0;
-            background-color: red;
-            border-radius: 50%;
+            background-image: url('assets/icons/drop.png'); /* Menggunakan gambar drop.png */
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 60px; /* Ukuran bola/gambar */
+            height: 60px; /* Ukuran bola/gambar */
             cursor: pointer;
             z-index: 1; /* Letakkan bola di belakang panel */
             animation: moveUp 5s linear infinite;
@@ -263,7 +237,7 @@
     </style>
 </head>
 <body>
-    <h1>Click the Drop!</h1>
+    <h1>Click the Red Ball!</h1>
     <div class="score">
         <div class="points">0</div>
         <div class="label">UDAH</div>
@@ -283,9 +257,38 @@
             <span>Quest</span>
         </button>
         <button class="button">
-            <img src="assets/icons/invite.png" alt="Invite Icon">
-            <span>Invite</span>
+            <img src="assets/icons/Play.png" alt="Play Icon">
+            <span>Play</span>
+        </button>
+        <button class="button">
+            <img src="assets/icons/Invites.png" alt="Invites Icon">
+            <span>Invites</span>
+        </button>
+        <button class="button">
+            <img src="assets/icons/Leaderboard.png" alt="Leaderboard Icon">
+            <span>Leader Board</span>
         </button>
     </div>
+
+    <script>
+        let score = 0;
+        const scoreDisplay = document.querySelector('.points');
+        const labelDisplay = document.querySelector('.label');
+
+        function formatScore(num) {
+            return num.toString().padStart(2, '0');
+        }
+
+        function showScore(points) {
+            scoreDisplay.textContent = formatScore(score);
+            labelDisplay.textContent = 'UDAH';
+            scoreDisplay.classList.add('show');
+            labelDisplay.classList.add('show');
+            setTimeout(() => {
+                scoreDisplay.classList.remove('show');
+                labelDisplay.classList.remove('show');
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
