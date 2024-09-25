@@ -33,6 +33,15 @@
             transform: translateX(-50%);
         }
 
+        .timer {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            font-size: 20px;
+            font-family: 'Pixelite', sans-serif;
+        }
+
         .score {
             position: absolute;
             top: 50%;
@@ -142,6 +151,10 @@
 </head>
 <body>
     <h1>Click IUS To Earn!</h1>
+
+    <!-- Timer -->
+    <div class="timer">60s</div>
+
     <div class="score">
         <div class="points">0</div>
         <div class="label">IUS</div>
@@ -157,7 +170,7 @@
             <img src="assets/icons/Quest.png" alt="Quest Icon">
             <span>Quest</span>
         </button>
-        <button class="button">
+        <button class="button" id="playButton">
             <img src="assets/icons/Play.png" alt="Play Icon">
             <span>Play</span>
         </button>
@@ -173,14 +186,22 @@
 
     <script>
         let score = 0;
+        let gameStarted = false;
+        let timer = 60;
+        let gameInterval, ballInterval;
+
         const scoreDisplay = document.querySelector('.points');
         const labelDisplay = document.querySelector('.label');
+        const timerDisplay = document.querySelector('.timer');
+        const playButton = document.getElementById('playButton');
 
         function formatScore(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Format dengan dot
         }
 
         function createBall() {
+            if (!gameStarted) return; // Jangan buat bola jika game belum dimulai
+
             const ball = document.createElement('div');
             const size = Math.random() * 40 + 20; // Ukuran acak antara 20px dan 60px
             const position = Math.random() * (window.innerWidth - size);
@@ -192,18 +213,18 @@
             ball.style.animationDuration = Math.random() * 3 + 3 + 's'; // Durasi animasi acak antara 3-6 detik
 
             ball.addEventListener('click', () => {
-                const points = Math.floor(Math.random() * 5) + 1; // Poin acak antara 10 dan 99
+                const points = Math.floor(Math.random() * 5) + 1; // Poin acak antara 1 dan 5
                 score += points;
 
                 // Update tampilan poin dengan animasi
                 scoreDisplay.textContent = formatScore(score);
                 scoreDisplay.classList.add('show');
-                labelDisplay.classList.add('show'); // Tambahkan animasi pada label "UDAH"
+                labelDisplay.classList.add('show'); 
 
                 setTimeout(() => {
                     scoreDisplay.classList.remove('show');
-                    labelDisplay.classList.remove('show'); // Hapus animasi setelah 1 detik
-                }, 1000); 
+                    labelDisplay.classList.remove('show');
+                }, 1000);
 
                 ball.remove(); // Hapus bola setelah diklik
             });
@@ -211,8 +232,46 @@
             document.body.appendChild(ball);
         }
 
-        // Buat bola baru setiap 1 detik
-        setInterval(createBall, 1000);
+        function startGame() {
+            if (gameStarted) return;
+
+            gameStarted = true;
+            score = 0;
+            scoreDisplay.textContent = formatScore(score);
+
+            // Reset timer
+            timer = 60;
+            timerDisplay.textContent = `${timer}s`;
+
+            gameInterval = setInterval(() => {
+                timer--;
+                timerDisplay.textContent = `${timer}s`;
+
+                if (timer <= 0) {
+                    stopGame();
+                }
+            }, 1000);
+
+            // Buat bola baru setiap 1 detik
+            ballInterval = setInterval(createBall, 1000);
+        }
+
+        function stopGame() {
+            gameStarted = false;
+
+            // Hentikan semua interval
+            clearInterval(gameInterval);
+            clearInterval(ballInterval);
+
+            // Reset poin setelah game selesai
+            score = 0;
+            scoreDisplay.textContent = formatScore(score);
+
+            // Hapus semua bola yang ada
+            document.querySelectorAll('.ball').forEach(ball => ball.remove());
+        }
+
+        playButton.addEventListener('click', startGame);
     </script>
 </body>
 </html>
