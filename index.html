@@ -44,6 +44,14 @@
             text-align: center;
         }
 
+        .button img {
+            display: block;
+            margin: 0 auto;
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+        }
+
         .button:hover {
             background-color: #333;
         }
@@ -58,6 +66,11 @@
                 padding: 15px;
                 font-size: 12px;
             }
+
+            .button img {
+                width: 20px;
+                height: 20px;
+            }
         }
     </style>
 </head>
@@ -66,11 +79,26 @@
 
     <!-- Panel Tombol Bawah -->
     <div class="button-panel">
-        <button class="button" id="homeButton">Home</button>
-        <button class="button" id="questButton">Quest</button>
-        <a href="game.html" class="button">Play</a>
-        <button class="button" id="invitesButton">Invites</button>
-        <button class="button" id="leaderboardButton">Leaderboard</button>
+        <button class="button" id="homeButton">
+            <img src="assets/icons/Home.png" alt="Home">
+            Home
+        </button>
+        <button class="button" id="questButton">
+            <img src="assets/icons/Quest.png" alt="Quest">
+            Quest
+        </button>
+        <a href="game.html" class="button">
+            <img src="assets/icons/Play.png" alt="Play">
+            Play
+        </a>
+        <button class="button" id="invitesButton">
+            <img src="assets/icons/Invites.png" alt="Invites">
+            Invites
+        </button>
+        <button class="button" id="leaderboardButton">
+            <img src="assets/icons/Leaderboard.png" alt="Leaderboard">
+            Leaderboard
+        </button>
     </div>
 
     <script>
