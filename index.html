@@ -15,6 +15,7 @@
             background-color: #fff; /* Main background changed to white */
             font-family: Arial, sans-serif;
             margin: 0;
+            cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
         }
 
         h1 {
@@ -90,10 +91,6 @@
             <img src="assets/icons/Quest.png" alt="Quest">
             Quest
         </button>
-        <a href="game.html" class="button">
-            <img src="assets/icons/Play.png" alt="Play">
-            Play
-        </a>
         <button class="button" id="invitesButton">
             <img src="assets/icons/Invites.png" alt="Invites">
             Invites
@@ -120,6 +117,11 @@
 
         document.getElementById('leaderboardButton').addEventListener('click', function() {
             alert('Leaderboard button clicked. No action assigned.');
+        });
+
+        // Detect click on the background to start the game
+        document.body.addEventListener('click', function() {
+            window.location.href = 'game.html'; // Redirect to the game page
         });
     </script>
 </body>
