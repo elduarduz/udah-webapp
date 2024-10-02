@@ -102,25 +102,29 @@
     </div>
 
     <script>
-        // Add listeners for buttons that don't do anything
-        document.getElementById('homeButton').addEventListener('click', function() {
+        // Add listeners for buttons that don't do anything and stop event propagation
+        document.getElementById('homeButton').addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent click from reaching the body
             alert('Home button clicked. No action assigned.');
         });
 
-        document.getElementById('questButton').addEventListener('click', function() {
+        document.getElementById('questButton').addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent click from reaching the body
             alert('Quest button clicked. No action assigned.');
         });
 
-        document.getElementById('invitesButton').addEventListener('click', function() {
+        document.getElementById('invitesButton').addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent click from reaching the body
             alert('Invites button clicked. No action assigned.');
         });
 
-        document.getElementById('leaderboardButton').addEventListener('click', function() {
+        document.getElementById('leaderboardButton').addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent click from reaching the body
             alert('Leaderboard button clicked. No action assigned.');
         });
 
         // Detect click on the background to start the game
-        document.body.addEventListener('click', function() {
+        document.body.addEventListener('click', function(event) {
             window.location.href = 'game.html'; // Redirect to the game page
         });
     </script>
