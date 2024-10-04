@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest Panel</title>
+    <style>
+        /* Same button styles as index.html */
+    </style>
+</head>
+<body>
+    <!-- Panel Tombol Bawah -->
+    <div class="button-panel">
+        <button class="button" id="homeButton">
+            <img src="assets/icons/Home.png" alt="Home">
+            Home
+        </button>
+        <button class="button" id="questButton">
+            <img src="assets/icons/Quest.png" alt="Quest">
+            Quest
+        </button>
+        <button class="button" id="invitesButton">
+            <img src="assets/icons/Invites.png" alt="Invites">
+            Invites
+        </button>
+        <button class="button" id="leaderboardButton">
+            <img src="assets/icons/Leaderboard.png" alt="Leaderboard">
+            Leaderboard
+        </button>
+    </div>
+
+    <script>
+        document.getElementById('homeButton').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('invitesButton').addEventListener('click', function() {
+            window.location.href = 'invites.html';
+        });
+
+        document.getElementById('leaderboardButton').addEventListener('click', function() {
+            window.location.href = 'leaderboard.html';
+        });
+    </script>
+</body>
+</html>
