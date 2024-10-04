@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Lobby - Click the Red Ball</title>
     <style>
-        /* Same styling as before */
         body {
             display: flex;
             flex-direction: column;
@@ -39,7 +38,7 @@
             padding: 20px;
             background-color: #000;
             color: white;
-            border-top: 4px solid #ADD8E6;
+            border-top: 4px solid grey;  /* Default grey border for other buttons */
             border-left: 1px solid grey;
             border-right: 1px solid grey;
             border-bottom: none;
@@ -47,6 +46,11 @@
             font-size: 14px;
             transition: background-color 0.3s;
             text-align: center;
+        }
+
+        /* Blue border for Home button */
+        #homeButton {
+            border-top: 4px solid #6dbcec;  /* Specific color for home */
         }
 
         .button img {
@@ -61,6 +65,7 @@
             background-color: #666666;
         }
 
+        /* Responsive styles for smaller screens */
         @media (max-width: 600px) {
             h1 {
                 font-size: 18px;
@@ -102,30 +107,26 @@
     </div>
 
     <script>
-        // Add listeners for buttons to navigate to respective pages
-        document.getElementById('homeButton').addEventListener('click', function(event) {
-            event.stopPropagation();
-            window.location.href = 'index.html';
+        // Add listeners for buttons
+        document.getElementById('homeButton').addEventListener('click', function() {
+            window.location.href = 'index.html'; // Redirect to the main page
         });
 
-        document.getElementById('questButton').addEventListener('click', function(event) {
-            event.stopPropagation();
-            window.location.href = 'quest.html';
+        document.getElementById('questButton').addEventListener('click', function() {
+            window.location.href = 'quest.html'; // Redirect to quest page
         });
 
-        document.getElementById('invitesButton').addEventListener('click', function(event) {
-            event.stopPropagation();
-            window.location.href = 'invites.html';
+        document.getElementById('invitesButton').addEventListener('click', function() {
+            window.location.href = 'invites.html'; // Redirect to invites page
         });
 
-        document.getElementById('leaderboardButton').addEventListener('click', function(event) {
-            event.stopPropagation();
-            window.location.href = 'leaderboard.html';
+        document.getElementById('leaderboardButton').addEventListener('click', function() {
+            window.location.href = 'leaderboard.html'; // Redirect to leaderboard page
         });
 
         // Detect click on the background to start the game
-        document.body.addEventListener('click', function(event) {
-            window.location.href = 'game.html';
+        document.body.addEventListener('click', function() {
+            window.location.href = 'game.html'; // Redirect to the game page
         });
     </script>
 </body>
