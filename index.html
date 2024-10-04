@@ -108,19 +108,23 @@
 
     <script>
         // Add listeners for buttons
-        document.getElementById('homeButton').addEventListener('click', function() {
+        document.getElementById('homeButton').addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent click from reaching the body
             window.location.href = 'index.html'; // Redirect to the main page
         });
 
-        document.getElementById('questButton').addEventListener('click', function() {
+        document.getElementById('questButton').addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent click from reaching the body
             window.location.href = 'quest.html'; // Redirect to quest page
         });
 
-        document.getElementById('invitesButton').addEventListener('click', function() {
+        document.getElementById('invitesButton').addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent click from reaching the body
             window.location.href = 'invites.html'; // Redirect to invites page
         });
 
-        document.getElementById('leaderboardButton').addEventListener('click', function() {
+        document.getElementById('leaderboardButton').addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent click from reaching the body
             window.location.href = 'leaderboard.html'; // Redirect to leaderboard page
         });
 
