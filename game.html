@@ -21,8 +21,6 @@
         }
         .redBall, .virus {
             position: absolute;
-            width: 50px; /* Size of the balls */
-            height: 50px;
             background-size: cover; /* Cover the entire area with the image */
         }
         .redBall {
@@ -53,29 +51,37 @@
         function createBall(type) {
             const ball = document.createElement('div');
             ball.className = type === 'red' ? 'redBall' : 'virus';
-            ball.style.left = Math.random() * (window.innerWidth - 50) + 'px'; // Random horizontal position
+            
+            // Random size between 50px, 75px, and 100px
+            const size = [50, 75, 100][Math.floor(Math.random() * 3)];
+            ball.style.width = size + 'px';
+            ball.style.height = size + 'px';
+
+            ball.style.left = Math.random() * (window.innerWidth - size) + 'px'; // Random horizontal position
             ball.style.top = window.innerHeight + 'px'; // Start at the bottom
+            
             document.body.appendChild(ball);
-            moveBall(ball, type);
+            moveBall(ball, type, size);
         }
 
         // Move the balls
-        function moveBall(ball, type) {
+        function moveBall(ball, type, size) {
+            const speed = Math.random() * (10 - 5) + 5; // Random speed between 5 and 10
             const interval = setInterval(() => {
                 if (ball) {
                     const ballRect = ball.getBoundingClientRect();
                     const greenBallRect = greenBall.getBoundingClientRect();
 
-                    // Move the ball upwards
-                    ball.style.top = (ballRect.top - 5) + 'px'; // Adjust the speed as needed
+                    // Move the ball downwards
+                    ball.style.top = (ballRect.top + speed) + 'px'; // Adjust speed as needed
 
                     // Check for collisions
-                    if (ballRect.bottom < 0) {
+                    if (ballRect.top > window.innerHeight) {
                         document.body.removeChild(ball); // Remove the ball if it goes off-screen
                         clearInterval(interval); // Stop moving this ball
                     } else if (
-                        ballRect.top < greenBallRect.bottom &&
                         ballRect.bottom > greenBallRect.top &&
+                        ballRect.top < greenBallRect.bottom &&
                         ballRect.left < greenBallRect.right &&
                         ballRect.right > greenBallRect.left) {
                         
@@ -89,7 +95,7 @@
                         clearInterval(interval); // Stop moving this ball
                     }
                 }
-            }, 100);
+            }, 16); // About 60 frames per second
         }
 
         // Create balls every 2 seconds
