@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game - Click the Red Ball</title>
+    <title>Game - Collect the Balls</title>
     <style>
         body {
             margin: 0;
@@ -13,25 +13,23 @@
         }
         #greenBall {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 50px; /* Green ball size */
+            height: 50px;
             background-color: green;
             border-radius: 50%;
-            top: 20px; /* Position the green ball at the top */
-            left: calc(50% - 150px); /* Center the green ball horizontally */
             pointer-events: none; /* Prevent interaction with the ball itself */
         }
         .redBall, .virus {
             position: absolute;
-            width: 50px;
+            width: 50px; /* Size of the balls */
             height: 50px;
-            border-radius: 50%;
+            background-size: cover; /* Cover the entire area with the image */
         }
         .redBall {
-            background-color: red;
+            background-image: url('assets/icons/drop.png'); /* Red ball image */
         }
         .virus {
-            background-color: blue; /* Change the color for visibility */
+            background-image: url('assets/icons/virus.png'); /* Virus image */
         }
         #score {
             position: absolute;
@@ -55,8 +53,8 @@
         function createBall(type) {
             const ball = document.createElement('div');
             ball.className = type === 'red' ? 'redBall' : 'virus';
-            ball.style.top = Math.random() * (window.innerHeight - 50) + 'px'; // Random vertical position
             ball.style.left = Math.random() * (window.innerWidth - 50) + 'px'; // Random horizontal position
+            ball.style.top = window.innerHeight + 'px'; // Start at the bottom
             document.body.appendChild(ball);
             moveBall(ball, type);
         }
@@ -68,8 +66,15 @@
                     const ballRect = ball.getBoundingClientRect();
                     const greenBallRect = greenBall.getBoundingClientRect();
 
+                    // Move the ball upwards
+                    ball.style.top = (ballRect.top - 5) + 'px'; // Adjust the speed as needed
+
                     // Check for collisions
-                    if (ballRect.top < greenBallRect.bottom &&
+                    if (ballRect.bottom < 0) {
+                        document.body.removeChild(ball); // Remove the ball if it goes off-screen
+                        clearInterval(interval); // Stop moving this ball
+                    } else if (
+                        ballRect.top < greenBallRect.bottom &&
                         ballRect.bottom > greenBallRect.top &&
                         ballRect.left < greenBallRect.right &&
                         ballRect.right > greenBallRect.left) {
@@ -82,9 +87,6 @@
                         scoreDisplay.innerText = `Score: ${score}`;
                         document.body.removeChild(ball); // Remove the ball after collection
                         clearInterval(interval); // Stop moving this ball
-                    } else if (ballRect.top > window.innerHeight) {
-                        document.body.removeChild(ball); // Remove ball if it moves off-screen
-                        clearInterval(interval); // Stop moving this ball
                     }
                 }
             }, 100);
@@ -92,14 +94,16 @@
 
         // Create balls every 2 seconds
         setInterval(() => {
-            const ballType = Math.random() < 0.7 ? 'red' : 'virus'; // 70% chance for red, 30% for virus
+            const ballType = Math.random() < 0.95 ? 'red' : 'virus'; // 95% chance for red, 5% for virus
             createBall(ballType);
         }, 2000);
 
         // Control the green ball with mouse movement
         document.addEventListener('mousemove', (event) => {
-            const x = event.clientX - 150; // Center the ball
-            greenBall.style.left = Math.min(Math.max(x, 0), window.innerWidth - 300) + 'px'; // Keep within bounds
+            const x = event.clientX - 25; // Center the ball
+            const y = event.clientY - 25; // Center the ball vertically
+            greenBall.style.left = Math.min(Math.max(x, 0), window.innerWidth - 50) + 'px'; // Keep within bounds
+            greenBall.style.top = Math.min(Math.max(y, 0), window.innerHeight - 50) + 'px'; // Keep within bounds
         });
     </script>
 </body>
