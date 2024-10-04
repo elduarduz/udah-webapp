@@ -22,7 +22,7 @@
 
         let redBallX = Math.random() * (window.innerWidth - 50);
         let blueBallX = Math.random() * (window.innerWidth - 50);
-        let greenBallX = (window.innerWidth / 2) - 25; // Centering the green ball
+        let greenBallX = (window.innerWidth / 2) - 25; // Center the green ball
 
         // Initialize positions
         redBall.style.left = `${redBallX}px`;
@@ -32,7 +32,7 @@
         greenBall.style.left = `${greenBallX}px`;
         greenBall.style.top = '0px'; // Position green ball at the top
 
-        // Move green ball with mouse
+        // Move green ball with mouse hover
         document.addEventListener('mousemove', (event) => {
             greenBallX = event.clientX - 25; // Center green ball on cursor
             greenBall.style.left = `${Math.max(0, Math.min(window.innerWidth - 50, greenBallX))}px`;
@@ -58,9 +58,12 @@
             ) {
                 ball2.style.display = 'none'; // Hide green ball on collision
                 if (type === 'red') {
-                    alert('Red ball exploded! Points +1 to +3!'); // Implement random points increase
+                    const pointsEarned = Math.floor(Math.random() * 3) + 1; // Random points between 1 and 3
+                    alert(`Red ball exploded! Points +${pointsEarned}!`);
+                    // Here you can add logic to increase the player's score by pointsEarned
                 } else if (type === 'blue') {
-                    alert('Green ball exploded! Points -10!'); // Implement points decrease
+                    alert('Green ball exploded! Points -10!');
+                    // Here you can add logic to decrease the player's score by 10
                 }
             }
         }
