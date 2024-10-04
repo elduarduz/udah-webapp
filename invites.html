@@ -15,7 +15,6 @@
             background-color: #fff;
             font-family: Arial, sans-serif;
             margin: 0;
-            cursor: pointer;
         }
 
         .button-panel {
@@ -31,7 +30,7 @@
             padding: 20px;
             background-color: #000;
             color: white;
-            border-top: 4px solid #ADD8E6;
+            border-top: 4px solid grey;  /* Default grey border for other buttons */
             border-left: 1px solid grey;
             border-right: 1px solid grey;
             border-bottom: none;
@@ -39,6 +38,11 @@
             font-size: 14px;
             transition: background-color 0.3s;
             text-align: center;
+        }
+
+        /* Blue border for Invites button */
+        #invitesButton {
+            border-top: 4px solid #6dbcec;  /* Specific color for invites */
         }
 
         .button img {
@@ -99,7 +103,7 @@
         });
 
         document.getElementById('invitesButton').addEventListener('click', function() {
-            window.location.href = 'invites.html'; // Reloads the same page
+            window.location.href = 'invites.html';  // Reload the invites page
         });
 
         document.getElementById('leaderboardButton').addEventListener('click', function() {
