@@ -12,8 +12,8 @@
             justify-content: center;
             height: 100vh;
             width: 100vw;
-            background-color: #fff;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f7f7f7, #e9f0f7);
+            font-family: 'Poppins', sans-serif;
             margin: 0;
         }
 
@@ -23,55 +23,62 @@
             background-color: #fff;
             position: absolute;
             bottom: 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 20px 20px 0 0;
         }
 
         .button {
             flex: 1;
-            padding: 20px;
-            background-color: #000;
+            padding: 15px;
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
             color: white;
-            border-top: 4px solid grey;  /* Default grey border for other buttons */
-            border-left: 1px solid grey;
-            border-right: 1px solid grey;
-            border-bottom: none;
+            border: none;
+            border-radius: 10px;
+            margin: 10px;
             cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
+            font-size: 16px;
+            transition: transform 0.3s, background-color 0.3s;
             text-align: center;
-        }
-
-        /* Blue border for Leaderboard button */
-        #leaderboardButton {
-            border-top: 4px solid #6dbcec;  /* Specific color for leaderboard */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .button img {
             display: block;
             margin: 0 auto;
-            width: 24px;
-            height: 24px;
-            margin-bottom: 5px;
+            width: 30px;
+            height: 30px;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
         }
 
         .button:hover {
-            background-color: #666666;
+            transform: translateY(-5px);
+            background-color: #3c6ea4;
+        }
+
+        /* Highlight Leaderboard button */
+        #leaderboardButton {
+            background: linear-gradient(135deg, #42a5f5, #1e88e5);
         }
 
         /* Responsive styles */
         @media (max-width: 600px) {
             .button {
-                padding: 15px;
-                font-size: 12px;
+                padding: 10px;
+                font-size: 14px;
             }
 
             .button img {
-                width: 20px;
-                height: 20px;
+                width: 24px;
+                height: 24px;
             }
         }
     </style>
 </head>
 <body>
+
+    <h1>Leaderboard</h1>
+    <p>Check out the top players in Click the Red Ball!</p>
 
     <!-- Button Panel -->
     <div class="button-panel">
@@ -107,7 +114,7 @@
         });
 
         document.getElementById('leaderboardButton').addEventListener('click', function() {
-            window.location.href = 'leaderboard.html';  // Reload the leaderboard page
+            window.location.href = 'leaderboard.html';  // Reloads the leaderboard page
         });
     </script>
 </body>
